@@ -50,9 +50,9 @@ Requires Node 18+ (Node 22 is used in CI).
 2. In the repository go to **Settings → Pages** and set **Source** to **GitHub Actions**.
 3. Push to `main`. The workflow in `.github/workflows/deploy.yml` installs dependencies, type-checks, builds and publishes `dist/`.
 
-Your site appears at `https://<user>.github.io/<repo>/`.
+The site is served from the custom domain in `public/CNAME` (`services.luan-moreno.com`). It needs a DNS `CNAME` record `services` → `<user>.github.io`, and the domain set under Settings → Pages → Custom domain.
 
-**Base path.** `vite.config.ts` reads `VITE_BASE_PATH` (default `/`). The workflow sets it automatically to `/<repo>/`, or `/` for `<user>.github.io` repositories. The app uses **hash routing** (`/#/services`), so refreshes and deep links work on GitHub Pages without 404 rewrites. To build for a specific path manually:
+**Base path.** `vite.config.ts` reads `VITE_BASE_PATH` (default `/`). The workflow doesn't set it, so the site is built for the root `/` (right for a custom domain). The app uses **hash routing** (`/#/services`), so refreshes and deep links work on GitHub Pages without 404 rewrites. To build for a specific path manually:
 
 ```bash
 VITE_BASE_PATH=/my-repo/ npm run build
